@@ -42,11 +42,18 @@
                                 Console.WriteLine($"{n1}*{n2}*{n3}= " + m1.mul(n1, n2, n3));
                                 break;
                             case "divide":
+                            try
+                            {
                                 Console.WriteLine($"{n1}= " + m1.div(n1));
                                 Console.WriteLine($"{n1}/{n2}= " + m1.div(n1, n2));
                                 Console.WriteLine($"{n1}/{n2}/{n3}= " + m1.div(n1, n2, n3));
-                                break;
-                            case "reminder":
+                                
+                            }catch(Exception e)
+                            {
+                                Console.WriteLine( e.Message);
+                            }
+                            break;
+                        case "reminder":
                                 Console.WriteLine($"{n1}= " + m1.reminder(n1));
                                 Console.WriteLine($"{n1}%{n2}= " + m1.reminder(n1, n2));
 
@@ -70,7 +77,17 @@
         public int add(int x, int y = 0, int z = 0) { return x + y + z; }
         public int substract(int x, int y = 0, int z = 0) { return x - y - z; }
         public int mul(int x, int y = 1, int z = 1) { return x * y * z; }
-        public double div(int x, int y = 1,int z=1) { return (double)x / y /z; }
+        public double div(int x, int y = 1,int z=1) {
+            if (y != 0 && z!= 0)
+            {
+                return(double)x / y / z;
+            }
+            else
+            {
+                throw new DivideByZeroException("Error: Division by zero!");
+            }
+
+             }
         public int reminder(int x, int y = 1) { return x % y; }
     }
 }
